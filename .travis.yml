@@ -7,4 +7,5 @@ matrix:
       env: DOTNETCORE=1
     - mono: 4.2.1
 script:
+  - chmod +x ./travis/setup-mysql.sh
   - ./build.sh
