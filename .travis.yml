@@ -3,7 +3,7 @@ solution: WordCounterService/WordCounterService.sln
 dist: trusty
 matrix:
   include:
-    - dotnet: 1.1.1
+    - dotnet: 1.0.1
       env: DOTNETCORE=1
     - mono: 4.2.1
     
