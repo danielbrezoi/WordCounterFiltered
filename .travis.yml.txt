@@ -6,3 +6,4 @@ matrix:
     - dotnet: 1.1.1
       env: DOTNETCORE=1
     - mono: 4.2.1
+    
