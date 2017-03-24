@@ -10,7 +10,7 @@ var configuration = Argument<string>("configuration", "Release");
 // GLOBAL VARIABLES
 ///////////////////////////////////////////////////////////////////////////////
 
-var solutions = GetFiles("./**/*.sln");
+var solutions = GetFiles("./WordCounter.sln");
 var solutionPaths = solutions.Select(solution => solution.GetDirectory());
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -38,6 +38,7 @@ Task("Clean")
     .Does(() =>
 {
     // Clean solution directories.
+    Information("Running Clean...");
     foreach(var path in solutionPaths)
     {
         Information("Cleaning {0}", path);
