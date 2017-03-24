@@ -66,15 +66,7 @@ Task("Build")
     .Does(() =>
 {
     // Build all solutions.
-    foreach(var solution in solutions)
-    {
-        Information("Building {0}", solution);
-        MSBuild(solution, settings =>
-            settings.SetPlatformTarget(PlatformTarget.MSIL)
-                .WithProperty("TreatWarningsAsErrors","true")
-                .WithTarget("Build")
-                .SetConfiguration(configuration));
-    }
+    BuildProject("WordCounter/WordCounter.csproj", configuration);
 });
 
 Task("Run-Unit-Tests")
@@ -83,6 +75,20 @@ Task("Run-Unit-Tests")
 {
     NUnit3("./**/bin/" + configuration + "/*Tests.dll");
 });
+
+//////////////////////////////////////////////////////////////////////
+// HELPER METHODS - BUILD
+//////////////////////////////////////////////////////////////////////
+
+void BuildProject(string projectPath, string configuration)
+{
+    DotNetBuild(projectPath, settings =>
+        settings.SetConfiguration(configuration)
+        .SetVerbosity(Verbosity.Minimal)
+        .WithTarget("Build")
+        .WithProperty("NodeReuse", "false")
+		.WithProperty("Platform", "AnyCPU"));
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // TARGETS
