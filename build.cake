@@ -73,7 +73,7 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    NUnit3("./**/bin/" + configuration + "/*Tests.dll");
+    NUnit3("./WordCounterFiltered/WordCounterTests/bin/Release/WordCounterTests.dll");
 });
 
 //////////////////////////////////////////////////////////////////////
