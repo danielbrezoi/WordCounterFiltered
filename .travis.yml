@@ -1,5 +1,5 @@
 language: csharp
-solution: WordCounterService/WordCounterService.sln
+solution: WordCounter.sln
 dist: trusty
 matrix:
   include:
