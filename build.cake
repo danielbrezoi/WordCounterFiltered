@@ -65,15 +65,17 @@ Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>
 {
-    // Build all solutions.
+    // Build all projects.
     BuildProject("WordCounter/WordCounter.csproj", configuration);
+	BuildProject("WordCounterService/WordCounterService.csproj", configuration);
+    BuildProject("WordCounterTests/WordCounterTests.csproj", configuration);
 });
 
 Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    NUnit3("WordCounterTests/bin/*/WordCounterTests.dll");
+    NUnit3("WordCounterTests/bin/**/WordCounterTests.dll");
 });
 
 //////////////////////////////////////////////////////////////////////
