@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 ///////////////////////////////////////////////////////////////////////////////
-#tool nuget:?package=NUnit.ConsoleRunner&version=3.6.0
+#tool nuget:?package=NUnit.ConsoleRunner&version=3.6.1
 
 var target = Argument<string>("target", "Default");
 var configuration = Argument<string>("configuration", "Release");
@@ -73,7 +73,7 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    NUnit3("./WordCounterFiltered/WordCounterTests/bin/Release/WordCounterTests.dll");
+    NUnit3("WordCounterTests/bin/*/WordCounterTests.dll");
 });
 
 //////////////////////////////////////////////////////////////////////
