@@ -1,9 +1,4 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WordCounterService.Application.DataFilter;
 using WordCounterService.Domain;
 
@@ -117,14 +112,19 @@ namespace WordCounterTests.UnitTests.DataFilter
         public void Builder_WithDigitAndPunctuationAndComposeFilters_ReturnsFilterResult()
         {
             //Arrange
-            var inputData = "This is just a test1. Th is is.";
+            var inputData = "This is just a test1. Th is is. This.";
+            var sizeOfWord = 4;
             var expectedColection = new WordCountCollection()
             {
-                { "This", 2 }
+                { "this", 2 }
             };
 
             //Act
-            WordCountCollection filterdColection = new WordsCounterBuilder(inputData).WithDigitsFilter();
+            WordCountCollection filterdColection = new WordsCounterBuilder(inputData)
+                                                       .WithDigitsFilter()
+                                                       .WithPunctuationFilter()
+                                                       .WithIgnoreCaseFilter()
+                                                       .WithCompositeFilter(sizeOfWord);
 
             //Assert
             Assert.AreEqual(expectedColection, filterdColection);

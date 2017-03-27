@@ -116,7 +116,6 @@ namespace WordCounterTests.UnitTests.DataFilter
                 { "sa", 2 },
                 { "asa", 2 },
                 { "sada", 3 },
-                { "sa", 2 },
                 { "ada", 2 }
             };
 

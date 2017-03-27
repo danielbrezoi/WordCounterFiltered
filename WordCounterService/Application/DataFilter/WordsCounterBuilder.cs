@@ -16,7 +16,7 @@ namespace WordCounterService.Application.DataFilter
         public WordsCounterBuilder(string data)
         {
             SortedWords = new WordCountCollection();
-            var allWords = data.Split(' ');
+            var allWords = data.Replace("\r", String.Empty).Replace("\t", String.Empty).Replace("\n", String.Empty).Split(' ');
             foreach (var word in allWords)
             {
                 SortedWords.AddToCounter(word);
@@ -56,7 +56,7 @@ namespace WordCounterService.Application.DataFilter
             return this;
         }
 
-        internal WordsCounterBuilder WithIgnoreCaseFilter()
+        public WordsCounterBuilder WithIgnoreCaseFilter()
         {
             if (SortedWords.Any())
             {

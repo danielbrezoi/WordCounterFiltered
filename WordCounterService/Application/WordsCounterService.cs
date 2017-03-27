@@ -20,7 +20,7 @@ namespace WordCounterService
             _wordsLength = wordsLength;
         }
 
-        public WordCountCollection GetWordsCounter(int wordsLength = 0)
+        public WordCountCollection GetWordsCounter()
         {
             WordsCounterBuilder builder = new WordsCounterBuilder(_data);
 

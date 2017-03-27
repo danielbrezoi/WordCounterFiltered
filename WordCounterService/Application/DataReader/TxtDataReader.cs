@@ -9,7 +9,6 @@ namespace WordCounterService.Application.DataReader
     {
         private string _filePath;
         private string _data;
-        private Func<string, IEnumerable<string>> _dataFilter;
         private Action<Type, Exception, string, Result> handleException = (exceptionType, exception, data, result) =>
         {
             data = string.Empty;

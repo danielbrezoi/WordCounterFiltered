@@ -7,7 +7,7 @@ namespace WordCounter
 {
     public class Options
     {
-        private string _filterType;
+        private string _filterType = "";
         private List<FiltersEnum> _filters = new List<FiltersEnum>();
         private Dictionary<string, FiltersEnum> _filtersMaps = new Dictionary<string, FiltersEnum>()
             {
@@ -19,7 +19,7 @@ namespace WordCounter
             };
 
 
-        [Option(shortName: 'p', longName:"filePath", Required = false, HelpText = "Full path to data file.")]
+        [Option(shortName: 'p', longName:"filePath", Required = true, HelpText = "Full path to data file.")]
         public string FilePath { get; set; }
 
         [Option(shortName: 'l', longName: "lenght", Required = false, HelpText = "If a value is prrovidet, only words with this lenght will be count)")]
@@ -34,16 +34,16 @@ namespace WordCounter
             return HelpText.AutoBuild(this, (HelpText current) => HelpText.DefaultParsingErrorsHandler(this, current));
         }
 
-        [Option(shortName: 'f', longName: "filterType", Required = false, HelpText = "Provide multiple filter type(digits, compose, puctuation, ignorecase)")]
+        [Option(shortName: 'f', longName: "filterType", Required = true, HelpText = "Provide multiple filter type(digits, compose, puctuation, ignorecase)")]
         public string Filter
         {
-            get { return _filterType; }
+            private get { return _filterType; }
             set
             {
-                var filters = value.Trim().ToLower().Split(',');
+                var filters = value.Replace(" ", "").ToLower().Split(',');
                 foreach (var filter in filters)
                 {
-                    if (_filtersMaps.ContainsKey(value)) { _filters.Add(_filtersMaps[filter]); }
+                    if (_filtersMaps.ContainsKey(filter)) { _filters.Add(_filtersMaps[filter]); }
                     else { throw new System.Exception(message: string.Format("Filter: {0} is not supported!", value)); }
                 }
             }

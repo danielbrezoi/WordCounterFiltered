@@ -25,7 +25,7 @@ namespace WordCounterService.Application.DataFilter
 
             for (int length = 1; length <=_wordLength/2; length++)
             {
-                MatchWordsWithLenght(allPosibleComposedWords.ToList(), allPossiblePartWords, length);
+                MatchWordsWithSpecifiedLenght(allPosibleComposedWords.ToList(), allPossiblePartWords, length);
             }
 
             wordsCounterKesy.ForEach(d => { if (!_wordsThatMatch.Contains(d)) { wordsCounter.Remove(d); }});
@@ -34,7 +34,7 @@ namespace WordCounterService.Application.DataFilter
         }
 
 
-        private void MatchWordsWithLenght(List<ComposedWord> composedWords, IEnumerable<string> words, int length)
+        private void MatchWordsWithSpecifiedLenght(List<ComposedWord> composedWords, IEnumerable<string> words, int length)
         {
             var isWordHalfLenght = _wordLength % 2 == 0 && 
                                     length == _wordLength / 2;

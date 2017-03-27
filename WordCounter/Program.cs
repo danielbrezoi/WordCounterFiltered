@@ -16,14 +16,15 @@ namespace WordCounter
             {
                 var result = new Result(Console.WriteLine);
                 var dataReader = new TxtDataReader(options.FilePath);
-                var wordsCounterService = new WordsCounterService(dataReader, result, options.Filters);
-                var wordsCount = wordsCounterService.GetWordsCounter(options.WordsLenght);
+                var wordsCounterService = new WordsCounterService(dataReader, result, options.Filters, options.WordsLenght);
+                var wordsCount = wordsCounterService.GetWordsCounter();
 
-                Console.WriteLine("Word Count:");
+                Console.WriteLine("Unique words: {0}", wordsCount.Count);
                 foreach (var word in wordsCount)
                 {
                     Console.WriteLine("For the word {0} we have {1} encounters in the data provided.", word.Key, word.Value);
                 }
+                Console.ReadLine();
             }
         }
     }

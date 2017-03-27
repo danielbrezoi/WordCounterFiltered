@@ -8,7 +8,7 @@ namespace WordCounterService.Application.DataFilter
     {
         public WordCountCollection Filter(WordCountCollection wordsCounter)
         {
-            char[] punctuationSign = new char[11] { '\'', ';', ':', '-', '!', '.', '?', '"', '(', ')', ','};
+            char[] punctuationSign = new char[13] { '\'', ';', ':', '-', '!', '.', '?', '"', '(', ')', ',', '\\', '`'};
             var words = wordsCounter.Keys.ToList();
             words.ForEach(d => { string cleanKey = d.Clean(punctuationSign);
                                         if (!cleanKey.Equals(d)) 
