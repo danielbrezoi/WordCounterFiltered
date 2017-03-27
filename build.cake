@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 ///////////////////////////////////////////////////////////////////////////////
-#tool nuget:?package=NUnit.ConsoleRunner&version=3.6.0
+#tool nuget:?package=NUnit.ConsoleRunner&version=3.6.1
 
 var target = Argument<string>("target", "Default");
 var configuration = Argument<string>("configuration", "Release");
@@ -10,7 +10,7 @@ var configuration = Argument<string>("configuration", "Release");
 // GLOBAL VARIABLES
 ///////////////////////////////////////////////////////////////////////////////
 
-var solutions = GetFiles("./**/*.sln");
+var solutions = GetFiles("./WordCounter.sln");
 var solutionPaths = solutions.Select(solution => solution.GetDirectory());
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -38,6 +38,7 @@ Task("Clean")
     .Does(() =>
 {
     // Clean solution directories.
+    Information("Running Clean...");
     foreach(var path in solutionPaths)
     {
         Information("Cleaning {0}", path);
@@ -64,24 +65,32 @@ Task("Build")
     .IsDependentOn("Restore")
     .Does(() =>
 {
-    // Build all solutions.
-    foreach(var solution in solutions)
-    {
-        Information("Building {0}", solution);
-        MSBuild(solution, settings =>
-            settings.SetPlatformTarget(PlatformTarget.MSIL)
-                .WithProperty("TreatWarningsAsErrors","true")
-                .WithTarget("Build")
-                .SetConfiguration(configuration));
-    }
+    // Build all projects.
+    BuildProject("WordCounter/WordCounter.csproj", configuration);
+	BuildProject("WordCounterService/WordCounterService.csproj", configuration);
+    BuildProject("WordCounterTests/WordCounterTests.csproj", configuration);
 });
 
 Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    NUnit3("./**/bin/" + configuration + "/*Tests.dll");
+    NUnit3("WordCounterTests/bin/**/WordCounterTests.dll");
 });
+
+//////////////////////////////////////////////////////////////////////
+// HELPER METHODS - BUILD
+//////////////////////////////////////////////////////////////////////
+
+void BuildProject(string projectPath, string configuration)
+{
+    DotNetBuild(projectPath, settings =>
+        settings.SetConfiguration(configuration)
+        .SetVerbosity(Verbosity.Minimal)
+        .WithTarget("Build")
+        .WithProperty("NodeReuse", "false")
+		.WithProperty("Platform", "AnyCPU"));
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // TARGETS
