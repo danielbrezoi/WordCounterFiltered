@@ -1,6 +1,7 @@
 # WordCounterFiltered
 
 [![Travis Build Status](https://travis-ci.org/danielbrezoi/WordCounterFiltered.svg?branch=master)](https://travis-ci.org/danielbrezoi/WordCounterFiltered)
+
 For this project I use Travis as a CI. Just click the build status image to go to build page.
 
 The project structure follows the domain driven desing approach has three main components:
