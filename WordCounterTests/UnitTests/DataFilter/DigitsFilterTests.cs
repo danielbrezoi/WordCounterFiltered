@@ -25,7 +25,7 @@ namespace WordCounterTests.UnitTests.DataFilter
             var filterDictionary = new DigitsFilter().Filter(inputeData);
 
             //Assert
-            Assert.Equals(inputeData, filterDictionary);
+            Assert.AreEqual(inputeData, filterDictionary);
         }
 
         [Test]
@@ -49,7 +49,7 @@ namespace WordCounterTests.UnitTests.DataFilter
             inputeData.Remove("a24");
 
             //Assert
-            Assert.Equals(inputeData, filterDictionary);
+            Assert.AreEqual(inputeData, filterDictionary);
         }
 
         [Test]

@@ -14,17 +14,18 @@ namespace WordCounterTests.UnitTests.DataFilter
             WordCountCollection inputeData = new WordCountCollection()
             {
                 { "a", 1 },
-                { "for", 35},
-                { "this", 26},
                 { "comma,", 1},
-                { "question?", 1}
+                { "for", 35},
+                { "question?", 1},
+                { "this", 26}
+
             };
 
             //Act
             var actual = new IgnoreCaseFilter().Filter(inputeData);
 
             //Assert
-            Assert.Equals(inputeData, actual);
+            Assert.AreEqual(inputeData, actual);
         }
 
         [Test]
@@ -53,7 +54,7 @@ namespace WordCounterTests.UnitTests.DataFilter
             var actual = new IgnoreCaseFilter().Filter(inputeData);
 
             //Assert
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -82,7 +83,7 @@ namespace WordCounterTests.UnitTests.DataFilter
             var actual = new IgnoreCaseFilter().Filter(inputeData);
 
             //Assert
-            Assert.Equals(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]

@@ -63,7 +63,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WordCounterService\WordCounterService.csproj">
       <Project>{07F2530E-0868-488E-8A50-E5368796EE3E}</Project>

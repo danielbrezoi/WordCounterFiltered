@@ -5,18 +5,19 @@ namespace WordCounterService.Application.DataFilter
 {
     public class IgnoreCaseFilter : IFilter
     {
-        public WordCountCollection Filter(WordCountCollection words)
+        public WordCountCollection Filter(WordCountCollection wordsCounter)
         {
-            words.Where(d => {
-                if (d.Key.Any(char.IsUpper))
+            var words = wordsCounter.Keys.ToList();
+            foreach (var word in words)
+            {
+                if (word.Any(char.IsUpper))
                 {
-                    words.AddToCounter(d.Key.ToLower());
-                    words.Remove(d.Key);
+                    wordsCounter.AddToCounter(word.ToLower(), wordsCounter[word]);
+                    wordsCounter.Remove(word);
                 }
-                return false;
-            });
+            }
 
-            return words;
+            return wordsCounter;
         }
     }
 }

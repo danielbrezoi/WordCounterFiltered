@@ -25,7 +25,7 @@ namespace WordCounterTests.UnitTests.DataFilter
             var filterDictionary = new PunctuationFilter().Filter(inputeData);
 
             //Assert
-            Assert.Equals(inputeData, filterDictionary);
+            Assert.AreEqual(inputeData, filterDictionary);
         }
 
         [Test]
@@ -39,19 +39,25 @@ namespace WordCounterTests.UnitTests.DataFilter
                 { "a24", 1},
                 { "for", 35},
                 { "this", 26},
-                { "comma,", 1},
+                { "comma,", 2},
                 { "question?", 1}
+            };
+            var expected = new WordCountCollection()
+            {
+                { "a", 1 },
+                { "24", 1},
+                { "a24", 1},
+                { "for", 35},
+                { "this", 26},
+                { "comma", 2},
+                { "question", 1}
             };
 
             //Act
             var filterDictionary = new PunctuationFilter().Filter(inputeData);
-            inputeData.Remove("comma,");
-            inputeData.Remove("question?");
-            inputeData.Add("comma", 1);
-            inputeData.Add("question", 1);
 
             //Assert
-            Assert.Equals(inputeData, filterDictionary);
+            Assert.AreEqual(inputeData, filterDictionary);
         }
 
         [Test]
@@ -75,7 +81,7 @@ namespace WordCounterTests.UnitTests.DataFilter
             inputeData.Remove("?");
 
             //Assert
-            Assert.Equals(inputeData, filterDictionary);
+            Assert.AreEqual(inputeData, filterDictionary);
         }
 
         [Test]

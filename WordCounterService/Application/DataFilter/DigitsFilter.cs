@@ -1,6 +1,7 @@
 ﻿using WordCounterService.Utils;
 using System.Text.RegularExpressions;
 using WordCounterService.Domain;
+using System.Linq;
 
 namespace WordCounterService.Application.DataFilter
 {
@@ -9,7 +10,8 @@ namespace WordCounterService.Application.DataFilter
         public WordCountCollection Filter(WordCountCollection wordsCounter)
         {
             string digitsPattern = @"\d";
-            wordsCounter.ForEach(d => { if (Regex.IsMatch(d.Key, digitsPattern)) { wordsCounter.Remove(d.Key); }});
+            var words = wordsCounter.Keys.ToList();
+            words.ForEach(d => { if (Regex.IsMatch(d, digitsPattern)) { wordsCounter.Remove(d); }});
 
             return wordsCounter;
         }

@@ -18,26 +18,23 @@ namespace WordCounterService.Application.DataFilter
         public WordCountCollection Filter(WordCountCollection wordsCounter)
         {
             var allPossiblePartWords = new List<string>();
+            var wordsCounterKesy = wordsCounter.Keys.ToList();
             wordsCounter.ForEach(d => { if (d.Key.Length < _wordLength) { allPossiblePartWords.Add(d.Key); } });
-            IEnumerable<ComposedWord> allPosibleComposedWords = wordsCounter.Where(d => d.Key.Length == _wordLength)
-                                                                            .ForEach(d =>
-                                                                                 {
-                                                                                     wordsCounter.AddToCounter(d.Key);
-                                                                                     return new ComposedWord(d.Key);
-                                                                                  });
+            IEnumerable<ComposedWord> allPosibleComposedWords = wordsCounterKesy.Where(d => d.Length == _wordLength)
+                                                                                .ForEach(d => new ComposedWord(d));
 
-            for (int length = 0; length <=_wordLength/2; length++)
+            for (int length = 1; length <=_wordLength/2; length++)
             {
-                MatchWordsWithLenght(allPosibleComposedWords, allPossiblePartWords, length);
+                MatchWordsWithLenght(allPosibleComposedWords.ToList(), allPossiblePartWords, length);
             }
 
-            wordsCounter.ForEach(d => { if (!_wordsThatMatch.Contains(d.Key)) { wordsCounter.Remove(d.Key); }});
+            wordsCounterKesy.ForEach(d => { if (!_wordsThatMatch.Contains(d)) { wordsCounter.Remove(d); }});
 
             return wordsCounter;
         }
 
 
-        private void MatchWordsWithLenght(IEnumerable<ComposedWord> composedWords, IEnumerable<string> words, int length)
+        private void MatchWordsWithLenght(List<ComposedWord> composedWords, IEnumerable<string> words, int length)
         {
             var isWordHalfLenght = _wordLength % 2 == 0 && 
                                     length == _wordLength / 2;
@@ -47,7 +44,7 @@ namespace WordCounterService.Application.DataFilter
         }
 
 
-        private void MatchWordsWithSameLengh(IEnumerable<ComposedWord> composedWords, IEnumerable<string> words, int length)
+        private void MatchWordsWithSameLengh(List<ComposedWord> composedWords, IEnumerable<string> words, int length)
         {
             List<string> partialWords = new List<string>();
             foreach (var word in words)
@@ -58,7 +55,7 @@ namespace WordCounterService.Application.DataFilter
         }
 
 
-        private void MatchWordsDifferentLenght(IEnumerable<ComposedWord> composedWords, IEnumerable<string> words, int length)
+        private void MatchWordsDifferentLenght(List<ComposedWord> composedWords, IEnumerable<string> words, int length)
         {
             List<string> partialWordLengthA = new List<string>();
             List<string> partialWordLengthB = new List<string>();
@@ -71,7 +68,7 @@ namespace WordCounterService.Application.DataFilter
         }
 
 
-        private void FindMatch(IEnumerable<ComposedWord> composedWords, 
+        private void FindMatch(List<ComposedWord> composedWords, 
                                IEnumerable<string> PartialWordsWithLenghtA, 
                                IEnumerable<string> PartialWordsWithLenghtB)
         {

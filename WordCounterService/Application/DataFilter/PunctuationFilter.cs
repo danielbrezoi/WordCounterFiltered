@@ -1,5 +1,6 @@
 ﻿using WordCounterService.Domain;
 using WordCounterService.Utils;
+using System.Linq;
 
 namespace WordCounterService.Application.DataFilter
 {
@@ -8,15 +9,15 @@ namespace WordCounterService.Application.DataFilter
         public WordCountCollection Filter(WordCountCollection wordsCounter)
         {
             char[] punctuationSign = new char[11] { '\'', ';', ':', '-', '!', '.', '?', '"', '(', ')', ','};
-
-            wordsCounter.ForEach(d => { string cleanKey = d.Key.Clean(punctuationSign);
-                                        if (!cleanKey.Equals(d.Key)) 
+            var words = wordsCounter.Keys.ToList();
+            words.ForEach(d => { string cleanKey = d.Clean(punctuationSign);
+                                        if (!cleanKey.Equals(d)) 
                                         {
-                                            wordsCounter.Remove(d.Key);
                                             if (!string.IsNullOrEmpty(cleanKey))
                                             {
-                                                wordsCounter.AddToCounter(d.Key.Clean(punctuationSign));
+                                                wordsCounter.AddToCounter(d.Clean(punctuationSign), wordsCounter[d]);
                                             }
+                                            wordsCounter.Remove(d);
                                         }});
 
             return wordsCounter;
