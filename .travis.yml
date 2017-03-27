@@ -5,7 +5,6 @@ matrix:
   include:
     - dotnet: 1.0.1
       env: DOTNETCORE=1
-    - mono: 4.2.1
 script:
   - chmod +x ./build.sh
   - ./build.sh
