@@ -18,3 +18,5 @@ If you want to just count al the words, just replace it with:
 
 The same options can be use for when calling this command line application in cmd.
 Int the WordCounterService.Application.DataReader.TxtDataReader.cs there is a sample of C# 7. Because of the Travis CI that it is working on linux it was more dificult to use the latest technologies from Microsoft. 
+
+The tests are run at build time, and the result can be seen in the Travis console
