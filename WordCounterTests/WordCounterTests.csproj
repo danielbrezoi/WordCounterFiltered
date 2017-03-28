@@ -52,7 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IntegrationTests\WordsCounterServiceTests.cs" />
+    <Compile Include="FunctionalTests\WordsCounterServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests\DataFilter\ComposedWordsFilterTests.cs" />
     <Compile Include="UnitTests\DataFilter\DigitsFilterTests.cs" />

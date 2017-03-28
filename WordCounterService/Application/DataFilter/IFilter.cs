@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using WordCounterService.Domain;
+﻿using WordCounterService.Domain;
 
 namespace WordCounterService.Application.DataFilter
 {

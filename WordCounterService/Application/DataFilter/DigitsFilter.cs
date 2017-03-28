@@ -1,5 +1,4 @@
-﻿using WordCounterService.Utils;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using WordCounterService.Domain;
 using System.Linq;
 

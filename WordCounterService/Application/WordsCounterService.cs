@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using WordCounterService.Utils;
+using WordCounterService.Domain;
 using WordCounterService.Application.DataFilter;
 using WordCounterService.Application.DataReader;
-using WordCounterService.Domain;
-using WordCounterService.Utils;
 
 namespace WordCounterService
 {

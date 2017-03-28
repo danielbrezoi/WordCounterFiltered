@@ -8,7 +8,7 @@ using WordCounterService.Domain;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace WordCounterTests.IntegrationTests
+namespace WordCounterTests.FunctionalTests
 {
     [TestFixture]
     public class WordsCounterServiceTests
